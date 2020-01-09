@@ -7,7 +7,7 @@
 
 ## Introduction
 
-This module plugs plugin-participatoryIdeation to plugin-participatorybudget by using REST services.
+
 
 ## Configuration
 
@@ -16,10 +16,6 @@ This module plugs plugin-participatoryIdeation to plugin-participatorybudget by 
 ## Usage
 
 
-
-# Project Information
-
- [Issue Tracking](http://dev.lutece.paris.fr/jira/browse/MPIPB) : this is a link to the issue management system for this project. Issues (bugs, features, change requests) can be created and queried using this link.
 
 
 [Maven documentation and reports](https://dev.lutece.paris.fr/plugins/module-participatoryideation-participatorybudget/)

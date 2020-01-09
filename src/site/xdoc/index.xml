@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Module ParticipatoryIdeation ParticipatoryBudget</title>
+    </properties>
+    <body>
+
+        <section name="Module ParticipatoryIdeation ParticipatoryBudget">
+            <!--
+            <p>
+                <img src="images/participatorybudget.png" />
+            </p>
+            -->
+            <subsection name="Introduction">
+                <p>This module plugs plugin-participatoryIdeation to plugin-participatorybudget by using REST services.</p>
+            </subsection>
+            <subsection name="Configuration">
+                <p></p>
+            </subsection>
+            <subsection name="Usage">
+                <p></p>
+            </subsection>
+        </section>
+
+	  	<section name="Project Information">
+			<p>
+				<a href="http://dev.lutece.paris.fr/jira/browse/MPIPB" target="_blank">Issue Tracking</a> : this is a link to the issue management system for this project. Issues (bugs, features, change requests) can be created and queried using this link.
+			</p>	
+	  	</section>
+
+    </body>
+</document>
+

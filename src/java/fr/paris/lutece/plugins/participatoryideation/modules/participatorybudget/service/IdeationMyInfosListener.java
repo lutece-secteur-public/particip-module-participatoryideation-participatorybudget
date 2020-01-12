@@ -71,10 +71,10 @@ public class IdeationMyInfosListener implements IMyInfosListener
     {
 
         // update comments
-        CommentFilter _commentFilter = new CommentFilter( );
-        _commentFilter.setLuteceUserName( strLuteceUserName );
+        CommentFilter commentFilter = new CommentFilter( );
+        commentFilter.setLuteceUserName( strLuteceUserName );
 
-        List<Comment> listComments = _commentService.findByResource( "*", Idee.PROPERTY_RESOURCE_TYPE, _commentFilter, 0, 10000, false );
+        List<Comment> listComments = _commentService.findByResource( "*", Idee.PROPERTY_RESOURCE_TYPE, commentFilter, 0, 10000, false );
 
         if ( listComments != null )
         {
@@ -89,11 +89,11 @@ public class IdeationMyInfosListener implements IMyInfosListener
         }
         // reindex all user idees
 
-        IdeeSearcher _ideeSearcher = new IdeeSearcher( );
-        _ideeSearcher.setLuteceUserName( strLuteceUserName );
-        _ideeSearcher.setIsPublished( true );
+        IdeeSearcher ideeSearcher = new IdeeSearcher( );
+        ideeSearcher.setLuteceUserName( strLuteceUserName );
+        ideeSearcher.setIsPublished( true );
 
-        Collection<Idee> ideesSubmitted = IdeeHome.getIdeesListSearch( _ideeSearcher );
+        Collection<Idee> ideesSubmitted = IdeeHome.getIdeesListSearch( ideeSearcher );
         for ( Idee idee : ideesSubmitted )
         {
 

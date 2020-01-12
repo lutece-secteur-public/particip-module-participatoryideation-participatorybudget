@@ -43,7 +43,7 @@ import fr.paris.lutece.portal.service.util.AppPropertiesService;
 public class MyInfosFromParticipatoryBudgetService extends AbstractRestBasedService implements IMyInfosService
 {
 
-    private final static String REST_URL = AppPropertiesService.getProperty( "participatoryideation.myinfos.rest.webapp.url" )
+    private static final String REST_URL = AppPropertiesService.getProperty( "participatoryideation.myinfos.rest.webapp.url" )
             + AppPropertiesService.getProperty( "participatoryideation.myinfos.rest.demand.base_url" );
 
     // *********************************************************************************************

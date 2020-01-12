@@ -48,7 +48,7 @@ import fr.paris.lutece.util.ReferenceList;
 public class IdeationCampaignFromParticipatoryBudgetService extends AbstractRestBasedService implements IIdeationCampaignService
 {
 
-    private final static String REST_URL = AppPropertiesService.getProperty( "participatoryideation.campaign.rest.webapp.url" )
+    private static final String REST_URL = AppPropertiesService.getProperty( "participatoryideation.campaign.rest.webapp.url" )
             + AppPropertiesService.getProperty( "participatoryideation.campaign.rest.demand.base_url" );
 
     // *********************************************************************************************

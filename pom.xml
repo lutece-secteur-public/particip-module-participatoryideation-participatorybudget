@@ -31,7 +31,6 @@
         </dependency>
       </dependencies>
 
-
     <properties>
         <componentName>participatorybudget</componentName>
         <jiraProjectName>MPIPB</jiraProjectName>

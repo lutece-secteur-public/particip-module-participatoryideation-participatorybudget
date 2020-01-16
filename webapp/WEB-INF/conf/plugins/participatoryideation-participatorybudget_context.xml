@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!--  REST bean -->
+
+	<bean id="participatoryideation-participatorybudget.exportToBudgetService"  class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export.ExportToBudgetService" />
+
+	<!--  Workflow task -->
+
+	<bean id="participatoryideation-participatorybudget.exportToBudgetTaskType"
+		class="fr.paris.lutece.plugins.workflowcore.business.task.TaskType"
+		p:key="exportToBudgetTask"
+		p:titleI18nKey="module.participatoryideation.participatorybudget.export_to_budget_task.title"
+		p:beanName="participatoryideation-participatorybudget.exportToBudgetTask"
+		p:configRequired="false" p:taskForAutomaticAction="true" />
+	
+	<bean id="participatoryideation-participatorybudget.exportToBudgetTask"
+		class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export.ExportToBudgetTask"
+		scope="prototype" />
+	
+</beans>

@@ -31,24 +31,35 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service;
+package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export;
 
-import fr.paris.lutece.plugins.participatorybudget.service.MyInfosListenerService;
-import fr.paris.lutece.portal.service.plugin.Plugin;
+import fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ParticipatoryBudgetPlugin;
+import fr.paris.lutece.plugins.workflow.service.taskinfo.AbstractTaskInfoProvider;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * IdeePlugin
+ *
+ * ExportToBudgetTaskInfoProvider
+ *
  */
-public class ParticipatoryBudgetPlugin extends Plugin
+public class ExportToBudgetTaskInfoProvider extends AbstractTaskInfoProvider
 {
-    public static final String PLUGIN_NAME = "participatoryideation-participatorybudget";
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPluginName( )
+    {
+        return ParticipatoryBudgetPlugin.PLUGIN_NAME;
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void init( )
+    public String getTaskResourceInfo( int nIdHistory, int nIdTask, HttpServletRequest request )
     {
-        MyInfosListenerService.registerListener( new IdeationMyInfosListener( ) );
+        return "<div>&laquo;" + getPluginName( ) + "&raquo; task resource info</div>";
     }
 }

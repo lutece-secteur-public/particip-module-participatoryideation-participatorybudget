@@ -31,24 +31,19 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service;
+package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export;
 
-import fr.paris.lutece.plugins.participatorybudget.service.MyInfosListenerService;
-import fr.paris.lutece.portal.service.plugin.Plugin;
+import fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ParticipatoryBudgetPlugin;
+import fr.paris.lutece.test.LuteceTestCase;
 
-/**
- * IdeePlugin
- */
-public class ParticipatoryBudgetPlugin extends Plugin
+public class ExportToBudgetTaskInfoProviderTest extends LuteceTestCase
 {
-    public static final String PLUGIN_NAME = "participatoryideation-participatorybudget";
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void init( )
+    public void testBusiness( )
     {
-        MyInfosListenerService.registerListener( new IdeationMyInfosListener( ) );
+        ExportToBudgetTaskInfoProvider provider = new ExportToBudgetTaskInfoProvider( );
+
+        assertTrue( ParticipatoryBudgetPlugin.PLUGIN_NAME.contentEquals( provider.getPluginName( ) ) );
+        assertTrue( provider.getTaskResourceInfo( 0, 0, null ).contains( provider.getPluginName( ) ) );
     }
 }

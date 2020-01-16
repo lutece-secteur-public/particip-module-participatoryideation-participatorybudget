@@ -33,10 +33,6 @@
  */
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.campaign;
 
-import java.util.Collection;
-
-import fr.paris.lutece.plugins.participatorybudget.business.campaign.Campagne;
-import fr.paris.lutece.plugins.participatorybudget.business.campaign.CampagneHome;
 import fr.paris.lutece.plugins.participatoryideation.service.campaign.IIdeationCampaignService;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
@@ -57,17 +53,10 @@ public class IdeationCampaignFromParticipatoryBudgetService extends AbstractRest
     // *********************************************************************************************
 
     // Provides list of campaigns
+    @Override
     public ReferenceList getCampaigns( )
     {
-        ReferenceList allAreas = new ReferenceList( );
-
-        Collection<Campagne> listCampaign = CampagneHome.getCampagnesList( );
-        for ( Campagne campaign : listCampaign )
-        {
-            allAreas.addItem( campaign.getCode( ), campaign.getTitle( ) );
-        }
-
-        return allAreas;
+        return parseReferenceList( REST_URL + "campaigns" );
     }
 
     // *********************************************************************************************

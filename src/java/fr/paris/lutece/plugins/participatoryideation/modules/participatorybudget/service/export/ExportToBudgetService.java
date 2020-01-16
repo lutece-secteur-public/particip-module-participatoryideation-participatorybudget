@@ -31,41 +31,57 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.myinfos;
+package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export;
 
-import fr.paris.lutece.plugins.participatoryideation.service.myinfos.IMyInfosService;
+import org.json.JSONObject;
+
+import fr.paris.lutece.plugins.participatoryideation.service.processor.IdeationClientProcessor;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
+import fr.paris.lutece.portal.service.spring.SpringContextService;
+import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 
 /**
  * This class provides 'myinfos' services from plugin-participatorybudget. It uses the REST API of the plugin.
  */
-public class MyInfosFromParticipatoryBudgetService extends AbstractRestBasedService implements IMyInfosService
+public class ExportToBudgetService extends AbstractRestBasedService
 {
 
-    private static final String REST_URL = AppPropertiesService.getProperty( "myinfos.rest.webapp.url" )
-            + AppPropertiesService.getProperty( "myinfos.rest.demand.base_url" );
+    private static final String REST_URL = AppPropertiesService.getProperty( "export.rest.webapp.url" )
+            + AppPropertiesService.getProperty( "export.rest.demand.base_url" );
 
     // *********************************************************************************************
-    // * ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID I *
-    // * ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID ISVALID I *
+    // * SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON *
+    // * SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON *
     // *********************************************************************************************
 
-    @Override
-    public boolean isUserValid( String userId )
+    private static final String BEAN_EXPORTTOBUDGET_SERVICE = "participatoryideation-participatorybudget.exportToBudgetService";
+
+    private static ExportToBudgetService _singleton;
+
+    public static ExportToBudgetService getInstance( )
     {
-        return parseBoolean( REST_URL + userId + "/are-myinfos-valid" );
+        if ( _singleton == null )
+        {
+            _singleton = SpringContextService.getBean( BEAN_EXPORTTOBUDGET_SERVICE );
+        }
+        return _singleton;
     }
 
     // *********************************************************************************************
-    // * FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL *
-    // * FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL FILL *
+    // * EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPOR *
+    // * EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPOR *
     // *********************************************************************************************
 
-    @Override
-    public String getUrlMyInfosFillAction( )
+    public String exportToParticipatoryBudgetAction( ) throws Exception
     {
-        return parseString( REST_URL + "url-myinfos-fill-action" );
+        JSONObject json = new JSONObject( IdeationClientProcessor.getProcess( REST_URL + "create" ) );
+        if ( !json.getString( "status" ).equals( "OK" ) )
+        {
+            AppLogService.error( "Something went wrong when exporting proposal to participatorybudget : " + json.getString( "result" ) );
+            throw new Exception( );
+        }
+        return json.getString( "result" );
     }
 
 }

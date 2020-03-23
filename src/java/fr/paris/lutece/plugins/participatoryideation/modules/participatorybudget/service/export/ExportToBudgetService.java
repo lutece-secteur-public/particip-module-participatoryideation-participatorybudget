@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,18 +33,17 @@
  */
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export;
 
-import org.json.JSONObject;
+import java.util.Map;
 
-import fr.paris.lutece.plugins.participatoryideation.service.processor.IdeationClientProcessor;
+import fr.paris.lutece.plugins.participatorybudget.service.project.ProjectService;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
-import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 
 /**
- * This class provides 'myinfos' services from plugin-participatorybudget. It uses the REST API of the plugin.
+ * This class provides 'export project' services from plugin-participatorybudget. It uses the REST API of the plugin.
  */
-public class ExportToBudgetService extends AbstractRestBasedService
+public class ExportToBudgetService extends AbstractRestBasedService implements IExportToBudgetService
 {
 
     private static final String REST_URL = AppPropertiesService.getProperty( "export.rest.webapp.url" )
@@ -65,6 +64,7 @@ public class ExportToBudgetService extends AbstractRestBasedService
         {
             _singleton = SpringContextService.getBean( BEAN_EXPORTTOBUDGET_SERVICE );
         }
+
         return _singleton;
     }
 
@@ -73,15 +73,10 @@ public class ExportToBudgetService extends AbstractRestBasedService
     // * EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPOR *
     // *********************************************************************************************
 
-    public String exportToParticipatoryBudgetAction( ) throws Exception
+    @Override
+    public int exportToParticipatoryBudgetAction( Map<String, String> docFields ) throws Exception
     {
-        JSONObject json = new JSONObject( IdeationClientProcessor.getProcess( REST_URL + "create" ) );
-        if ( !json.getString( "status" ).equals( "OK" ) )
-        {
-            AppLogService.error( "Something went wrong when exporting proposal to participatorybudget : " + json.getString( "result" ) );
-            throw new Exception( );
-        }
-        return json.getString( "result" );
+        return ProjectService.getInstance( ).createproject( docFields );
     }
 
 }

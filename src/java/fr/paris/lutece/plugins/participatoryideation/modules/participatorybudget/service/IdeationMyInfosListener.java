@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -69,7 +69,6 @@ public class IdeationMyInfosListener implements IMyInfosListener
     @Override
     public void updateNickName( String strLuteceUserName, String strNickName )
     {
-
         // update comments
         CommentFilter commentFilter = new CommentFilter( );
         commentFilter.setLuteceUserName( strLuteceUserName );
@@ -105,7 +104,6 @@ public class IdeationMyInfosListener implements IMyInfosListener
     @Override
     public void createNickName( String strLuteceUserName, String strNickName )
     {
-
         ReferenceList refList = IdeationSubscriptionProviderService.getService( ).getRefListIdeationSubscription( Locale.FRENCH );
 
         for ( ReferenceItem refItem : refList )
@@ -125,7 +123,6 @@ public class IdeationMyInfosListener implements IMyInfosListener
     @Override
     public String deleteVotes( HttpServletRequest request )
     {
-
         return null;
     }
 

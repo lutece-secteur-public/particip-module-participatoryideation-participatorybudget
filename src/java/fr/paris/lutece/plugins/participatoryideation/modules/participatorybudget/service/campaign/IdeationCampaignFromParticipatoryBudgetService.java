@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,6 +33,8 @@
  */
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.campaign;
 
+import org.json.JSONObject;
+
 import fr.paris.lutece.plugins.participatoryideation.service.campaign.IIdeationCampaignService;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
@@ -56,7 +58,8 @@ public class IdeationCampaignFromParticipatoryBudgetService extends AbstractRest
     @Override
     public ReferenceList getCampaigns( )
     {
-        return parseReferenceList( REST_URL + "campaigns" );
+        JSONObject json = doGetJSon( REST_URL + "campaigns" );
+        return parseReferenceList( json );
     }
 
     // *********************************************************************************************
@@ -67,61 +70,71 @@ public class IdeationCampaignFromParticipatoryBudgetService extends AbstractRest
     @Override
     public boolean isBeforeBeginning( String phase )
     {
-        return parseBoolean( REST_URL + phase + "/before-beginning" );
+        JSONObject json = doGetJSon( REST_URL + phase + "/before-beginning" );
+        return parseBoolean( json );
     }
 
     @Override
     public boolean isBeforeBeginning( String codeCampaign, String phase )
     {
-        return parseBoolean( REST_URL + codeCampaign + "/" + phase + "/before-beginning" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/before-beginning" );
+        return parseBoolean( json );
     }
 
     @Override
     public boolean isAfterBeginning( String phase )
     {
-        return parseBoolean( REST_URL + phase + "/after-beginning" );
+        JSONObject json = doGetJSon( REST_URL + phase + "/after-beginning" );
+        return parseBoolean( json );
     }
 
     @Override
     public boolean isAfterBeginning( String codeCampaign, String phase )
     {
-        return parseBoolean( REST_URL + codeCampaign + "/" + phase + "/after-beginning" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/after-beginning" );
+        return parseBoolean( json );
     }
 
     @Override
     public boolean isDuring( String phase )
     {
-        return parseBoolean( REST_URL + phase + "/during" );
+        JSONObject json = doGetJSon( REST_URL + phase + "/during" );
+        return parseBoolean( json );
     }
 
     @Override
     public boolean isDuring( String codeCampaign, String phase )
     {
-        return parseBoolean( REST_URL + codeCampaign + "/" + phase + "/during" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/during" );
+        return parseBoolean( json );
     }
 
     @Override
     public boolean isBeforeEnd( String phase )
     {
-        return parseBoolean( REST_URL + phase + "/before-end" );
+        JSONObject json = doGetJSon( REST_URL + phase + "/before-end" );
+        return parseBoolean( json );
     }
 
     @Override
     public boolean isBeforeEnd( String codeCampaign, String phase )
     {
-        return parseBoolean( REST_URL + codeCampaign + "/" + phase + "/before-end" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/before-end" );
+        return parseBoolean( json );
     }
 
     @Override
     public boolean isAfterEnd( String phase )
     {
-        return parseBoolean( REST_URL + phase + "/after-end" );
+        JSONObject json = doGetJSon( REST_URL + phase + "/after-end" );
+        return parseBoolean( json );
     }
 
     @Override
     public boolean isAfterEnd( String codeCampaign, String phase )
     {
-        return parseBoolean( REST_URL + codeCampaign + "/" + phase + "/after-end" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/after-end" );
+        return parseBoolean( json );
     }
 
     // *********************************************************************************************
@@ -132,49 +145,57 @@ public class IdeationCampaignFromParticipatoryBudgetService extends AbstractRest
     @Override
     public int getCampaignNumberLocalizedAreas( String codeCampaign )
     {
-        return countValueList( REST_URL + codeCampaign + "/localized-areas" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/localized-areas" );
+        return countValueList( json );
     }
 
     @Override
     public int getCampaignNumberLocalizedAreas( )
     {
-        return countValueList( REST_URL + "localized-areas" );
+        JSONObject json = doGetJSon( REST_URL + "localized-areas" );
+        return countValueList( json );
     }
 
     @Override
     public ReferenceList getCampaignAllAreas( String codeCampaign )
     {
-        return parseValueList( REST_URL + codeCampaign + "/all-areas" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/all-areas" );
+        return parseValueList( json );
     }
 
     @Override
     public ReferenceList getCampaignAllAreas( )
     {
-        return parseValueList( REST_URL + "all-areas" );
+        JSONObject json = doGetJSon( REST_URL + "all-areas" );
+        return parseValueList( json );
     }
 
     @Override
     public ReferenceList getCampaignLocalizedAreas( String codeCampaign )
     {
-        return parseValueList( REST_URL + codeCampaign + "/localized-areas" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/localized-areas" );
+        return parseValueList( json );
     }
 
     @Override
     public ReferenceList getCampaignLocalizedAreas( )
     {
-        return parseValueList( REST_URL + "localized-areas" );
+        JSONObject json = doGetJSon( REST_URL + "localized-areas" );
+        return parseValueList( json );
     }
 
     @Override
     public String getCampaignWholeArea( String codeCampaign )
     {
-        return parseString( REST_URL + codeCampaign + "/whole-area" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/whole-area" );
+        return parseString( json );
     }
 
     @Override
     public String getCampaignWholeArea( )
     {
-        return parseString( REST_URL + "whole-area" );
+        JSONObject json = doGetJSon( REST_URL + "whole-area" );
+        return parseString( json );
     }
 
     // *********************************************************************************************
@@ -185,13 +206,15 @@ public class IdeationCampaignFromParticipatoryBudgetService extends AbstractRest
     @Override
     public ReferenceList getCampaignThemes( String codeCampaign )
     {
-        return parseReferenceList( REST_URL + codeCampaign + "/themes" );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/themes" );
+        return parseReferenceList( json );
     }
 
     @Override
     public ReferenceList getCampaignThemes( )
     {
-        return parseReferenceList( REST_URL + "themes" );
+        JSONObject json = doGetJSon( REST_URL + "themes" );
+        return parseReferenceList( json );
     }
 
 }

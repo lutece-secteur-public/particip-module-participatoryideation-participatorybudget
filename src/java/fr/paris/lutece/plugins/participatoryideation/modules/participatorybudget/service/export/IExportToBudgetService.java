@@ -31,24 +31,26 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service;
+package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export;
 
-import fr.paris.lutece.plugins.participatorybudget.service.MyInfosListenerService;
-import fr.paris.lutece.portal.service.plugin.Plugin;
+import java.util.Map;
 
 /**
- * IdeePlugin
+ * This interface provides 'export project' services from plugin-participatorybudget.
  */
-public class ParticipatoryBudgetPlugin extends Plugin
+public interface IExportToBudgetService
 {
-    public static final String PLUGIN_NAME = "participatoryideation-participatorybudget";
+
+    // *********************************************************************************************
+    // * EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPOR *
+    // * EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPOR *
+    // *********************************************************************************************
 
     /**
-     * {@inheritDoc}
+     * Export a proposal as a project.
+     * 
+     * @return Technical id of the project.
      */
-    @Override
-    public void init( )
-    {
-        MyInfosListenerService.registerListener( new IdeationMyInfosListener( ) );
-    }
+    public int exportToParticipatoryBudgetAction( Map<String, String> docFields ) throws Exception;
+
 }

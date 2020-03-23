@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,11 +33,14 @@
  */
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import fr.paris.lutece.plugins.participatorybudget.util.Constants;
 import fr.paris.lutece.plugins.participatoryideation.business.Idee;
 import fr.paris.lutece.plugins.participatoryideation.business.IdeeHome;
 import fr.paris.lutece.plugins.participatoryideation.service.IdeeWSService;
@@ -92,8 +95,8 @@ public class ExportToBudgetTask extends SimpleTask
 
         if ( proposal == null )
         {
-            AppLogService.error( "ExportToBudgetTask.processTask() method called with an unknown proposal #" + resourceHistory.getIdResource( )
-                    + " in resource history !" );
+            AppLogService.error(
+                    "ExportToBudgetTask.processTask() method called with an unknown proposal #" + resourceHistory.getIdResource( ) + " in resource history !" );
             return;
         }
 
@@ -107,14 +110,22 @@ public class ExportToBudgetTask extends SimpleTask
         // Do export
         try
         {
-            ExportToBudgetService.getInstance( ).exportToParticipatoryBudgetAction( );
+            Map<String, String> docFields = new HashMap<>( );
 
-            // Changing state, only if export process did not thrown an exception
+            docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampagne( ) );
+
+            int projectId = ExportToBudgetService.getInstance( ).exportToParticipatoryBudgetAction( docFields );
+
+            // Attach proposal to project
+            proposal.setIdProjet( Integer.toString( projectId ) );
+
+            // Change state if export process did not thrown an exception
             proposal.setExportedTag( 1 );
             IdeeWSService.getInstance( ).updateIdee( proposal );
         }
         catch( Exception e )
         {
+            AppLogService.error( "ExportToBudgetTask.processTask() thrown an exception, export aborted.", e );
             return;
         }
 

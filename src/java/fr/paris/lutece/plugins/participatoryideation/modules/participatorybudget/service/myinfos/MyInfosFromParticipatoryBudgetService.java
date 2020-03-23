@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,6 +33,8 @@
  */
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.myinfos;
 
+import org.json.JSONObject;
+
 import fr.paris.lutece.plugins.participatoryideation.service.myinfos.IMyInfosService;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
@@ -54,7 +56,8 @@ public class MyInfosFromParticipatoryBudgetService extends AbstractRestBasedServ
     @Override
     public boolean isUserValid( String userId )
     {
-        return parseBoolean( REST_URL + userId + "/are-myinfos-valid" );
+        JSONObject json = doGetJSon( REST_URL + userId + "/are-myinfos-valid" );
+        return parseBoolean( json );
     }
 
     // *********************************************************************************************
@@ -65,7 +68,8 @@ public class MyInfosFromParticipatoryBudgetService extends AbstractRestBasedServ
     @Override
     public String getUrlMyInfosFillAction( )
     {
-        return parseString( REST_URL + "url-myinfos-fill-action" );
+        JSONObject json = doGetJSon( REST_URL + "url-myinfos-fill-action" );
+        return parseString( json );
     }
 
 }

@@ -33,7 +33,7 @@
  */
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export;
 
-import java.util.Map;
+import fr.paris.lutece.plugins.participatoryideation.business.Idee;
 
 /**
  * This interface provides 'export project' services from plugin-participatorybudget.
@@ -51,6 +51,6 @@ public interface IExportToBudgetService
      * 
      * @return Technical id of the project.
      */
-    public int exportToParticipatoryBudgetAction( Map<String, String> docFields ) throws Exception;
+    public int exportToParticipatoryBudgetAction( Idee proposal ) throws Exception;
 
 }

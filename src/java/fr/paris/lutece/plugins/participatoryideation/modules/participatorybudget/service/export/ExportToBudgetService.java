@@ -33,21 +33,24 @@
  */
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.Map;
 
 import fr.paris.lutece.plugins.participatorybudget.service.project.ProjectService;
+import fr.paris.lutece.plugins.participatorybudget.util.Constants;
+import fr.paris.lutece.plugins.participatoryideation.business.Idee;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
-import fr.paris.lutece.portal.service.util.AppPropertiesService;
 
 /**
- * This class provides 'export project' services from plugin-participatorybudget. It uses the REST API of the plugin.
+ * This class provides 'export project' services from plugin-participatorybudget. Should uses a REST API of the plugin.
  */
 public class ExportToBudgetService extends AbstractRestBasedService implements IExportToBudgetService
 {
 
-    private static final String REST_URL = AppPropertiesService.getProperty( "export.rest.webapp.url" )
-            + AppPropertiesService.getProperty( "export.rest.demand.base_url" );
+    // TODO : Put this portlet id in property file
+    public static final int DOCUMENT_PROJECT_PUBLISH_PORTLET_ID = 158;
 
     // *********************************************************************************************
     // * SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON *
@@ -74,9 +77,41 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
     // *********************************************************************************************
 
     @Override
-    public int exportToParticipatoryBudgetAction( Map<String, String> docFields ) throws Exception
+    public int exportToParticipatoryBudgetAction( Idee proposal ) throws Exception
     {
-        return ProjectService.getInstance( ).createproject( docFields );
+    	String title = proposal.getTitre();
+    	String summary = proposal.getTitre();
+    	Timestamp valid = new Timestamp( new java.util.Date( ).getTime( ) );
+    			
+    	// Populate project attributes map
+        Map<String, String> docFields = new HashMap<>( );
+        
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS, proposal.getAdress() );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS_GEOLOC, proposal.getGeoJson() );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampagne( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_DESCRIPTION, proposal.getDescription() );
+
+        if ( proposal.getLocalisationType() == Idee.LOCALISATION_TYPE_PARIS )
+        {
+        	docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, Idee.LOCALISATION_TYPE_PARIS );
+        }
+        else
+        {
+        	docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, proposal.getLocalisationArdt() );
+        }
+
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_ID, Integer.toString( proposal.getId() ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_NICKNAMES, proposal.getDepositaire() );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_SUBTITLE, proposal.getTitre() );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_TITLE, proposal.getTitre() );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_URL, "/jsp/site/Portal.jsp?page=idee&campagne=" + proposal.getCodeCampagne() + "&idee=" + proposal.getCodeIdee() );
+
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_STATUS, "SOUMIS" );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_THEME, proposal.getCodeTheme() );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_VALUE, Long.toString( proposal.getCout() ) );
+
+        // TODO : Create WS Rest API in particip-plugin-participatorybudget, and use it here, rather than directly use ProjectService class.
+        return ProjectService.getInstance( ).createproject( title, summary, valid, DOCUMENT_PROJECT_PUBLISH_PORTLET_ID, docFields );
     }
 
 }

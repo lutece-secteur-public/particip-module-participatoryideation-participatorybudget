@@ -110,11 +110,7 @@ public class ExportToBudgetTask extends SimpleTask
         // Do export
         try
         {
-            Map<String, String> docFields = new HashMap<>( );
-
-            docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampagne( ) );
-
-            int projectId = ExportToBudgetService.getInstance( ).exportToParticipatoryBudgetAction( docFields );
+            int projectId = ExportToBudgetService.getInstance( ).exportToParticipatoryBudgetAction( proposal );
 
             // Attach proposal to project
             proposal.setIdProjet( Integer.toString( projectId ) );

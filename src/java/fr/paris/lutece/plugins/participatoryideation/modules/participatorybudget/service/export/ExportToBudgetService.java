@@ -37,6 +37,8 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import fr.paris.lutece.plugins.participatorybudget.service.project.ProjectService;
 import fr.paris.lutece.plugins.participatorybudget.util.Constants;
 import fr.paris.lutece.plugins.participatoryideation.business.Idee;
@@ -108,7 +110,7 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
 
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_STATUS, "SOUMIS" );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_THEME, proposal.getCodeTheme() );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_VALUE, Long.toString( proposal.getCout() ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_VALUE, "" + proposal.getCout() );
 
         // TODO : Create WS Rest API in particip-plugin-participatorybudget, and use it here, rather than directly use ProjectService class.
         return ProjectService.getInstance( ).createproject( title, summary, valid, DOCUMENT_PROJECT_PUBLISH_PORTLET_ID, docFields );

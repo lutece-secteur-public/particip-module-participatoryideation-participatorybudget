@@ -9,7 +9,20 @@
 
 	<bean id="participatoryideation-participatorybudget.exportToBudgetService"  class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export.ExportToBudgetService" />
 
-	<!--  Workflow task -->
+	<!--  Workflow task : Reinit proposal -->
+
+	<bean id="participatoryideation-participatorybudget.reinitProposalTaskType"
+		class="fr.paris.lutece.plugins.workflowcore.business.task.TaskType"
+		p:key="reinitProposalTask"
+		p:titleI18nKey="module.participatoryideation.participatorybudget.reinit_proposal_task.title"
+		p:beanName="participatoryideation-participatorybudget.reinitProposalTask"
+		p:configRequired="false" p:taskForAutomaticAction="true" />
+	
+	<bean id="participatoryideation-participatorybudget.reinitProposalTask"
+		class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export.ReinitProposalTask"
+		scope="prototype" />
+	
+	<!--  Workflow task : Export to budget -->
 
 	<bean id="participatoryideation-participatorybudget.exportToBudgetTaskType"
 		class="fr.paris.lutece.plugins.workflowcore.business.task.TaskType"

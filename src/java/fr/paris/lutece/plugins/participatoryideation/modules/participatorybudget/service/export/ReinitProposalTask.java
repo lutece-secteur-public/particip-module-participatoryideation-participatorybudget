@@ -48,10 +48,10 @@ import fr.paris.lutece.portal.service.util.AppLogService;
 
 /**
  * 
- * This task exports the proposal as a project.
+ * This task reinitializes the proposal.
  *
  */
-public class ExportToBudgetTask extends SimpleTask
+public class ReinitProposalTask extends SimpleTask
 {
     @Inject
     private IResourceHistoryService _resourceHistoryService;
@@ -59,7 +59,7 @@ public class ExportToBudgetTask extends SimpleTask
     @Override
     public String getTitle( Locale locale )
     {
-        return "Export as participatorybudget project";
+        return "Reinit proposal";
     }
 
     // *********************************************************************************************
@@ -77,13 +77,13 @@ public class ExportToBudgetTask extends SimpleTask
 
         if ( resourceHistory == null )
         {
-            AppLogService.error( "ExportToBudgetTask.processTask() method called with a unknown resource history id #" + nIdResourceHistory + " !" );
+            AppLogService.error( "ReinitProposalTask.processTask() method called with a unknown resource history id #" + nIdResourceHistory + " !" );
             return;
         }
 
         if ( !Idee.WORKFLOW_RESOURCE_TYPE.equals( resourceHistory.getResourceType( ) ) )
         {
-            AppLogService.error( "ExportToBudgetTask.processTask() method called with a bad resource type '" + resourceHistory.getResourceType( )
+            AppLogService.error( "ReinitProposalTask.processTask() method called with a bad resource type '" + resourceHistory.getResourceType( )
                     + "' in resource history, should be '" + Idee.WORKFLOW_RESOURCE_TYPE + "'  !" );
             return;
         }
@@ -93,27 +93,17 @@ public class ExportToBudgetTask extends SimpleTask
         if ( proposal == null )
         {
             AppLogService.error(
-                    "ExportToBudgetTask.processTask() method called with an unknown proposal #" + resourceHistory.getIdResource( ) + " in resource history !" );
+                    "ReinitProposalTask.processTask() method called with an unknown proposal #" + resourceHistory.getIdResource( ) + " in resource history !" );
             return;
         }
 
-        // Validate operation is possible
-        if ( proposal.getExportedTag( ) == 1 )
-        {
-            AppLogService.error( "ExportToBudgetTask.processTask() method called with a proposal marked as already exported !" );
-            return;
-        }
-
-        // Do export
+        // Do reinit
         try
         {
-            int projectId = ExportToBudgetService.getInstance( ).exportToParticipatoryBudgetAction( proposal );
-
-            // Attach proposal to project
-            proposal.setIdProjet( Integer.toString( projectId ) );
-
-            // Change state if export process did not thrown an exception
-            proposal.setExportedTag( 1 );
+            proposal.setIdProjet( "" );
+            proposal.setStatusPublic( Idee.Status.STATUS_DRAFT );
+            proposal.setExportedTag( 0 );
+            
             IdeeWSService.getInstance( ).updateIdee( proposal );
         }
         catch( Exception e )

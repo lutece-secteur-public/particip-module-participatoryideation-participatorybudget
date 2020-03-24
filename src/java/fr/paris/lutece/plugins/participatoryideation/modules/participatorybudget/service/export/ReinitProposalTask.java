@@ -103,7 +103,7 @@ public class ReinitProposalTask extends SimpleTask
             proposal.setIdProjet( "" );
             proposal.setStatusPublic( Idee.Status.STATUS_DRAFT );
             proposal.setExportedTag( 0 );
-            
+
             IdeeWSService.getInstance( ).updateIdee( proposal );
         }
         catch( Exception e )

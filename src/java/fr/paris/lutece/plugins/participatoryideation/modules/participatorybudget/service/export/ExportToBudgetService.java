@@ -81,36 +81,37 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
     @Override
     public int exportToParticipatoryBudgetAction( Idee proposal ) throws Exception
     {
-    	String title = proposal.getTitre();
-    	String summary = proposal.getTitre();
-    	Timestamp valid = new Timestamp( new java.util.Date( ).getTime( ) );
-    			
-    	// Populate project attributes map
-        Map<String, String> docFields = new HashMap<>( );
-        
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS, proposal.getAdress() );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS_GEOLOC, proposal.getGeoJson() );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampagne( ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_DESCRIPTION, proposal.getDescription() );
+        String title = proposal.getTitre( );
+        String summary = proposal.getTitre( );
+        Timestamp valid = new Timestamp( new java.util.Date( ).getTime( ) );
 
-        if ( proposal.getLocalisationType() == Idee.LOCALISATION_TYPE_PARIS )
+        // Populate project attributes map
+        Map<String, String> docFields = new HashMap<>( );
+
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS, proposal.getAdress( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS_GEOLOC, proposal.getGeoJson( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampagne( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_DESCRIPTION, proposal.getDescription( ) );
+
+        if ( proposal.getLocalisationType( ) == Idee.LOCALISATION_TYPE_PARIS )
         {
-        	docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, Idee.LOCALISATION_TYPE_PARIS );
+            docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, Idee.LOCALISATION_TYPE_PARIS );
         }
         else
         {
-        	docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, proposal.getLocalisationArdt() );
+            docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, proposal.getLocalisationArdt( ) );
         }
 
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_ID, Integer.toString( proposal.getId() ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_NICKNAMES, proposal.getDepositaire() );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_SUBTITLE, proposal.getTitre() );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_TITLE, proposal.getTitre() );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_URL, "/jsp/site/Portal.jsp?page=idee&campagne=" + proposal.getCodeCampagne() + "&idee=" + proposal.getCodeIdee() );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_ID, Integer.toString( proposal.getId( ) ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_NICKNAMES, proposal.getDepositaire( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_SUBTITLE, proposal.getTitre( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_TITLE, proposal.getTitre( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_URL,
+                "/jsp/site/Portal.jsp?page=idee&campagne=" + proposal.getCodeCampagne( ) + "&idee=" + proposal.getCodeIdee( ) );
 
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_STATUS, "SOUMIS" );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_THEME, proposal.getCodeTheme() );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_VALUE, "" + proposal.getCout() );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_THEME, proposal.getCodeTheme( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_VALUE, "" + proposal.getCout( ) );
 
         // TODO : Create WS Rest API in particip-plugin-participatorybudget, and use it here, rather than directly use ProjectService class.
         return ProjectService.getInstance( ).createproject( title, summary, valid, DOCUMENT_PROJECT_PUBLISH_PORTLET_ID, docFields );

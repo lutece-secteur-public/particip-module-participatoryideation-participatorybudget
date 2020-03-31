@@ -38,8 +38,8 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import fr.paris.lutece.plugins.participatoryideation.business.Idee;
-import fr.paris.lutece.plugins.participatoryideation.business.IdeeHome;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.Idee;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.IdeeHome;
 import fr.paris.lutece.plugins.participatoryideation.service.IdeeWSService;
 import fr.paris.lutece.plugins.workflowcore.business.resource.ResourceHistory;
 import fr.paris.lutece.plugins.workflowcore.service.resource.IResourceHistoryService;

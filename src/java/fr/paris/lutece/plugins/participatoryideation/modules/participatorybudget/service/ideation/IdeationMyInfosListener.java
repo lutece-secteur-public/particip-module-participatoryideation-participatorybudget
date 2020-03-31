@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service;
+package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ideation;
 
 import java.util.Collection;
 import java.util.List;
@@ -39,18 +39,18 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import fr.paris.lutece.plugins.participatorybudget.service.IMyInfosListener;
-import fr.paris.lutece.plugins.participatoryideation.business.Idee;
-import fr.paris.lutece.plugins.participatoryideation.business.IdeeHome;
-import fr.paris.lutece.plugins.participatoryideation.business.IdeeSearcher;
-import fr.paris.lutece.plugins.participatoryideation.service.SolrIdeeIndexer;
-import fr.paris.lutece.plugins.participatoryideation.service.subscription.IdeationSubscriptionProviderService;
 import fr.paris.lutece.plugins.extend.modules.comment.business.Comment;
 import fr.paris.lutece.plugins.extend.modules.comment.business.CommentFilter;
 import fr.paris.lutece.plugins.extend.modules.comment.business.ICommentDAO;
 import fr.paris.lutece.plugins.extend.modules.comment.service.CommentPlugin;
 import fr.paris.lutece.plugins.extend.modules.comment.service.CommentService;
 import fr.paris.lutece.plugins.extend.modules.comment.service.ICommentService;
+import fr.paris.lutece.plugins.participatorybudget.service.IMyInfosListener;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.Idee;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.IdeeHome;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.IdeeSearcher;
+import fr.paris.lutece.plugins.participatoryideation.service.SolrIdeeIndexer;
+import fr.paris.lutece.plugins.participatoryideation.service.subscription.IdeationSubscriptionProviderService;
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.util.ReferenceItem;

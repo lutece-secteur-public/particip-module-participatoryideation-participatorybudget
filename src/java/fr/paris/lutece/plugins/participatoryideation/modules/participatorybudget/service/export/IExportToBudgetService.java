@@ -33,7 +33,7 @@
  */
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export;
 
-import fr.paris.lutece.plugins.participatoryideation.business.Idee;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.Idee;
 
 /**
  * This interface provides 'export project' services from plugin-participatorybudget.

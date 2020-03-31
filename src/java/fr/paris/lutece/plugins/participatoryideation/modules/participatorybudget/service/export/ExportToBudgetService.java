@@ -37,11 +37,9 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
 import fr.paris.lutece.plugins.participatorybudget.service.project.ProjectService;
 import fr.paris.lutece.plugins.participatorybudget.util.Constants;
-import fr.paris.lutece.plugins.participatoryideation.business.Idee;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.Idee;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 

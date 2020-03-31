@@ -34,6 +34,7 @@
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service;
 
 import fr.paris.lutece.plugins.participatorybudget.service.MyInfosListenerService;
+import fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ideation.IdeationMyInfosListener;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 /**

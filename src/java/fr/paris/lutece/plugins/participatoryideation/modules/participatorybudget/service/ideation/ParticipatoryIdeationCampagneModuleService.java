@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.campaign;
+package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ideation;
 
 import org.json.JSONObject;
 
@@ -43,7 +43,7 @@ import fr.paris.lutece.util.ReferenceList;
 /**
  * This class provides campaign services and informations from plugin-participatorybudget. It uses the REST API of the plugin.
  */
-public class IdeationCampaignFromParticipatoryBudgetService extends AbstractRestBasedService implements IIdeationCampaignService
+public class ParticipatoryIdeationCampagneModuleService extends AbstractRestBasedService implements IIdeationCampaignService
 {
 
     protected static final String REST_URL = AppPropertiesService.getProperty( "campaign.rest.webapp.url" )

@@ -88,7 +88,7 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
 
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS, proposal.getAdress( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS_GEOLOC, proposal.getGeoJson( ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampagne( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampaign( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_DESCRIPTION, proposal.getDescription( ) );
 
         if ( proposal.getLocalisationType( ) == Proposal.LOCALISATION_TYPE_PARIS )
@@ -101,11 +101,11 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
         }
 
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_ID, Integer.toString( proposal.getId( ) ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_NICKNAMES, proposal.getDepositaire( ) );
+        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_NICKNAMES, proposal.getDepositary( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_SUBTITLE, proposal.getTitre( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_TITLE, proposal.getTitre( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_URL,
-                "/jsp/site/Portal.jsp?page=proposal&campagne=" + proposal.getCodeCampagne( ) + "&proposal=" + proposal.getCodeProposal( ) );
+                "/jsp/site/Portal.jsp?page=proposal&campaign=" + proposal.getCodeCampaign( ) + "&proposal=" + proposal.getCodeProposal( ) );
 
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_STATUS, "SOUMIS" );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_THEME, proposal.getCodeTheme( ) );

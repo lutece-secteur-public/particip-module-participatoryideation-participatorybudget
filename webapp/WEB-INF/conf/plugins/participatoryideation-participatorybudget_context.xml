@@ -8,7 +8,7 @@
 	<!-- Beans -->
 
 	<bean id="participatoryideation-participatorybudget.exportToBudgetService"  class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export.ExportToBudgetService" />
-	<bean id="participatoryideation-participatorybudget.participatoryIdeationModuleEventListener"  class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ideation.ParticipatoryIdeationCampagneEventListener" />
+	<bean id="participatoryideation-participatorybudget.participatoryIdeationModuleEventListener"  class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ideation.ParticipatoryIdeationCampaignEventListener" />
 
 	<!--  Workflow task : Reinit proposal -->
 

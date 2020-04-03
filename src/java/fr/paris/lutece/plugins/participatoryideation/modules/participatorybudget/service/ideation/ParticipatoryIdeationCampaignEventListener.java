@@ -40,13 +40,12 @@ import org.apache.commons.lang.StringUtils;
 
 import fr.paris.lutece.plugins.participatorybudget.service.campaign.event.CampaignEvent;
 import fr.paris.lutece.plugins.participatorybudget.service.campaign.event.CampaignEventListener;
-import fr.paris.lutece.plugins.participatoryideation.business.depositary.CampagneDepositaire;
-import fr.paris.lutece.plugins.participatoryideation.business.depositary.CampagneDepositaireHome;
-import fr.paris.lutece.plugins.participatoryideation.business.depositary.DepositaireTypeHome;
+import fr.paris.lutece.plugins.participatoryideation.business.depositary.Depositary;
+import fr.paris.lutece.plugins.participatoryideation.business.depositary.DepositaryHome;
 import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalHome;
 import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalSearcher;
 
-public class ParticipatoryIdeationCampagneEventListener implements CampaignEventListener
+public class ParticipatoryIdeationCampaignEventListener implements CampaignEventListener
 {
 
     @Override
@@ -78,14 +77,14 @@ public class ParticipatoryIdeationCampagneEventListener implements CampaignEvent
         String newCampaignCode = campaignEvent.getMainCampaign( ).getCode( );
 
         // Clone depositaries
-        Collection<CampagneDepositaire> depositaries = CampagneDepositaireHome.getCampagneDepositaireListByCampagne( clonedCampaignCode );
-        for ( CampagneDepositaire depositary : depositaries )
+        Collection<Depositary> depositaries = DepositaryHome.getDepositaryListByCampaign( clonedCampaignCode );
+        for ( Depositary depositary : depositaries )
         {
-            CampagneDepositaire newDepositary = new CampagneDepositaire( );
-            newDepositary.setCodeDepositaireType( depositary.getCodeDepositaireType( ) );
-            newDepositary.setCodeCampagne( newCampaignCode );
+        	Depositary newDepositary = new Depositary( );
+            newDepositary.setCodeDepositaryType( depositary.getCodeDepositaryType( ) );
+            newDepositary.setCodeCampaign( newCampaignCode );
 
-            CampagneDepositaireHome.create( newDepositary );
+            DepositaryHome.create( newDepositary );
         }
 
         return StringUtils.EMPTY;
@@ -99,7 +98,7 @@ public class ParticipatoryIdeationCampagneEventListener implements CampaignEvent
     private String process_CAMPAIGN_CODE_MODIFICATION_AUTHORISATION( CampaignEvent campaignEvent )
     {
         ProposalSearcher searcher = new ProposalSearcher( );
-        searcher.setCodeCampagne( campaignEvent.getMainCampaign( ).getCode( ) );
+        searcher.setCodeCampaign( campaignEvent.getMainCampaign( ).getCode( ) );
 
         if ( CollectionUtils.isNotEmpty( ProposalHome.getProposalsListSearch( searcher ) ) )
         {
@@ -114,7 +113,7 @@ public class ParticipatoryIdeationCampagneEventListener implements CampaignEvent
     private String process_CAMPAIGN_CODE_MODIFIED( CampaignEvent campaignEvent )
     {
         // Change code in depositary data
-        CampagneDepositaireHome.changeCampainCode( campaignEvent.getMainCampaign( ).getCode( ), campaignEvent.getLinkedCampaign( ).getCode( ) );
+    	DepositaryHome.changeCampainCode( campaignEvent.getMainCampaign( ).getCode( ), campaignEvent.getLinkedCampaign( ).getCode( ) );
 
         return StringUtils.EMPTY;
     }

@@ -38,7 +38,7 @@ import fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 /**
- * IdeePlugin
+ * ProposalPlugin
  */
 public class ParticipatoryBudgetPlugin extends Plugin
 {

@@ -46,10 +46,10 @@ import fr.paris.lutece.plugins.extend.modules.comment.service.CommentPlugin;
 import fr.paris.lutece.plugins.extend.modules.comment.service.CommentService;
 import fr.paris.lutece.plugins.extend.modules.comment.service.ICommentService;
 import fr.paris.lutece.plugins.participatorybudget.service.IMyInfosListener;
-import fr.paris.lutece.plugins.participatoryideation.business.proposal.Idee;
-import fr.paris.lutece.plugins.participatoryideation.business.proposal.IdeeHome;
-import fr.paris.lutece.plugins.participatoryideation.business.proposal.IdeeSearcher;
-import fr.paris.lutece.plugins.participatoryideation.service.SolrIdeeIndexer;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.Proposal;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalHome;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalSearcher;
+import fr.paris.lutece.plugins.participatoryideation.service.SolrProposalIndexer;
 import fr.paris.lutece.plugins.participatoryideation.service.subscription.IdeationSubscriptionProviderService;
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
@@ -59,11 +59,11 @@ import fr.paris.lutece.util.ReferenceList;
 public class IdeationMyInfosListener implements IMyInfosListener
 {
 
-    private static final String BEAN_SOLR_IDEE_INDEXER = "participatoryideation.solrIdeeIndexer";
+    private static final String BEAN_SOLR_PROPOSAL_INDEXER = "participatoryideation.solrProposalIndexer";
     private static final String BEAN_COMMENT_DAO = "extend-comment.commentDAO";
 
     private ICommentService _commentService = SpringContextService.getBean( CommentService.BEAN_SERVICE );
-    private SolrIdeeIndexer _solrIdeeIndexer = SpringContextService.getBean( BEAN_SOLR_IDEE_INDEXER );
+    private SolrProposalIndexer _solrProposalIndexer = SpringContextService.getBean( BEAN_SOLR_PROPOSAL_INDEXER );
     private ICommentDAO _commentDAO = SpringContextService.getBean( BEAN_COMMENT_DAO );
 
     @Override
@@ -73,7 +73,7 @@ public class IdeationMyInfosListener implements IMyInfosListener
         CommentFilter commentFilter = new CommentFilter( );
         commentFilter.setLuteceUserName( strLuteceUserName );
 
-        List<Comment> listComments = _commentService.findByResource( "*", Idee.PROPERTY_RESOURCE_TYPE, commentFilter, 0, 10000, false );
+        List<Comment> listComments = _commentService.findByResource( "*", Proposal.PROPERTY_RESOURCE_TYPE, commentFilter, 0, 10000, false );
 
         if ( listComments != null )
         {
@@ -86,17 +86,17 @@ public class IdeationMyInfosListener implements IMyInfosListener
             }
 
         }
-        // reindex all user idees
+        // reindex all user proposals
 
-        IdeeSearcher ideeSearcher = new IdeeSearcher( );
-        ideeSearcher.setLuteceUserName( strLuteceUserName );
-        ideeSearcher.setIsPublished( true );
+        ProposalSearcher proposalSearcher = new ProposalSearcher( );
+        proposalSearcher.setLuteceUserName( strLuteceUserName );
+        proposalSearcher.setIsPublished( true );
 
-        Collection<Idee> ideesSubmitted = IdeeHome.getIdeesListSearch( ideeSearcher );
-        for ( Idee idee : ideesSubmitted )
+        Collection<Proposal> proposalsSubmitted = ProposalHome.getProposalsListSearch( proposalSearcher );
+        for ( Proposal proposal : proposalsSubmitted )
         {
 
-            _solrIdeeIndexer.writeIdee( idee );
+            _solrProposalIndexer.writeProposal( proposal );
 
         }
     }

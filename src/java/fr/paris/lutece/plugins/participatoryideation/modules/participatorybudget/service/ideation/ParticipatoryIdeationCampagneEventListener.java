@@ -43,8 +43,8 @@ import fr.paris.lutece.plugins.participatorybudget.service.campaign.event.Campai
 import fr.paris.lutece.plugins.participatoryideation.business.depositary.CampagneDepositaire;
 import fr.paris.lutece.plugins.participatoryideation.business.depositary.CampagneDepositaireHome;
 import fr.paris.lutece.plugins.participatoryideation.business.depositary.DepositaireTypeHome;
-import fr.paris.lutece.plugins.participatoryideation.business.proposal.IdeeHome;
-import fr.paris.lutece.plugins.participatoryideation.business.proposal.IdeeSearcher;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalHome;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalSearcher;
 
 public class ParticipatoryIdeationCampagneEventListener implements CampaignEventListener
 {
@@ -56,10 +56,10 @@ public class ParticipatoryIdeationCampagneEventListener implements CampaignEvent
         {
             case CampaignEvent.CAMPAIGN_CLONED:
                 return process_CAMPAIGN_CLONED( campaignEvent );
-                
+
             case CampaignEvent.CAMPAIGN_CODE_MODIFICATION_AUTHORISATION:
                 return process_CAMPAIGN_CODE_MODIFICATION_AUTHORISATION( campaignEvent );
-                
+
             case CampaignEvent.CAMPAIGN_CODE_MODIFIED:
                 return process_CAMPAIGN_CODE_MODIFIED( campaignEvent );
         }
@@ -98,10 +98,10 @@ public class ParticipatoryIdeationCampagneEventListener implements CampaignEvent
 
     private String process_CAMPAIGN_CODE_MODIFICATION_AUTHORISATION( CampaignEvent campaignEvent )
     {
-        IdeeSearcher searcher = new IdeeSearcher( );
+        ProposalSearcher searcher = new ProposalSearcher( );
         searcher.setCodeCampagne( campaignEvent.getMainCampaign( ).getCode( ) );
 
-        if ( CollectionUtils.isNotEmpty( IdeeHome.getIdeesListSearch( searcher ) ) )
+        if ( CollectionUtils.isNotEmpty( ProposalHome.getProposalsListSearch( searcher ) ) )
         {
             return "Existing proposal(s) with this code.";
         }
@@ -113,9 +113,9 @@ public class ParticipatoryIdeationCampagneEventListener implements CampaignEvent
 
     private String process_CAMPAIGN_CODE_MODIFIED( CampaignEvent campaignEvent )
     {
-    	// Change code in depositary data
-    	CampagneDepositaireHome.changeCampainCode( campaignEvent.getMainCampaign().getCode(), campaignEvent.getLinkedCampaign().getCode() );
-    	
+        // Change code in depositary data
+        CampagneDepositaireHome.changeCampainCode( campaignEvent.getMainCampaign( ).getCode( ), campaignEvent.getLinkedCampaign( ).getCode( ) );
+
         return StringUtils.EMPTY;
     }
 

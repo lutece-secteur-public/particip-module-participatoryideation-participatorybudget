@@ -38,9 +38,9 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import fr.paris.lutece.plugins.participatoryideation.business.proposal.Idee;
-import fr.paris.lutece.plugins.participatoryideation.business.proposal.IdeeHome;
-import fr.paris.lutece.plugins.participatoryideation.service.IdeeWSService;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.Proposal;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalHome;
+import fr.paris.lutece.plugins.participatoryideation.service.ProposalWSService;
 import fr.paris.lutece.plugins.workflowcore.business.resource.ResourceHistory;
 import fr.paris.lutece.plugins.workflowcore.service.resource.IResourceHistoryService;
 import fr.paris.lutece.plugins.workflowcore.service.task.SimpleTask;
@@ -70,7 +70,7 @@ public class ExportToBudgetTask extends SimpleTask
     @Override
     public void processTask( int nIdResourceHistory, HttpServletRequest request, Locale locale )
     {
-        Idee proposal = null;
+        Proposal proposal = null;
 
         // Get proposal
         ResourceHistory resourceHistory = _resourceHistoryService.findByPrimaryKey( nIdResourceHistory );
@@ -81,14 +81,14 @@ public class ExportToBudgetTask extends SimpleTask
             return;
         }
 
-        if ( !Idee.WORKFLOW_RESOURCE_TYPE.equals( resourceHistory.getResourceType( ) ) )
+        if ( !Proposal.WORKFLOW_RESOURCE_TYPE.equals( resourceHistory.getResourceType( ) ) )
         {
             AppLogService.error( "ExportToBudgetTask.processTask() method called with a bad resource type '" + resourceHistory.getResourceType( )
-                    + "' in resource history, should be '" + Idee.WORKFLOW_RESOURCE_TYPE + "'  !" );
+                    + "' in resource history, should be '" + Proposal.WORKFLOW_RESOURCE_TYPE + "'  !" );
             return;
         }
 
-        proposal = IdeeHome.findByPrimaryKey( resourceHistory.getIdResource( ) );
+        proposal = ProposalHome.findByPrimaryKey( resourceHistory.getIdResource( ) );
 
         if ( proposal == null )
         {
@@ -114,7 +114,7 @@ public class ExportToBudgetTask extends SimpleTask
 
             // Change state if export process did not thrown an exception
             proposal.setExportedTag( 1 );
-            IdeeWSService.getInstance( ).updateIdee( proposal );
+            ProposalWSService.getInstance( ).updateProposal( proposal );
         }
         catch( Exception e )
         {

@@ -39,7 +39,7 @@ import java.util.Map;
 
 import fr.paris.lutece.plugins.participatorybudget.service.project.ProjectService;
 import fr.paris.lutece.plugins.participatorybudget.util.Constants;
-import fr.paris.lutece.plugins.participatoryideation.business.proposal.Idee;
+import fr.paris.lutece.plugins.participatoryideation.business.proposal.Proposal;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 
@@ -77,7 +77,7 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
     // *********************************************************************************************
 
     @Override
-    public int exportToParticipatoryBudgetAction( Idee proposal ) throws Exception
+    public int exportToParticipatoryBudgetAction( Proposal proposal ) throws Exception
     {
         String title = proposal.getTitre( );
         String summary = proposal.getTitre( );
@@ -91,9 +91,9 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampagne( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_DESCRIPTION, proposal.getDescription( ) );
 
-        if ( proposal.getLocalisationType( ) == Idee.LOCALISATION_TYPE_PARIS )
+        if ( proposal.getLocalisationType( ) == Proposal.LOCALISATION_TYPE_PARIS )
         {
-            docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, Idee.LOCALISATION_TYPE_PARIS );
+            docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, Proposal.LOCALISATION_TYPE_PARIS );
         }
         else
         {
@@ -105,7 +105,7 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_SUBTITLE, proposal.getTitre( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_TITLE, proposal.getTitre( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_URL,
-                "/jsp/site/Portal.jsp?page=idee&campagne=" + proposal.getCodeCampagne( ) + "&idee=" + proposal.getCodeIdee( ) );
+                "/jsp/site/Portal.jsp?page=proposal&campagne=" + proposal.getCodeCampagne( ) + "&proposal=" + proposal.getCodeProposal( ) );
 
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_STATUS, "SOUMIS" );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_THEME, proposal.getCodeTheme( ) );

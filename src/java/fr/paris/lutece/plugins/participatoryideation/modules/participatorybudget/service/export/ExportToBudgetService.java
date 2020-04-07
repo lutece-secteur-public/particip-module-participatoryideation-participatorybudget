@@ -91,7 +91,7 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampaign( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_DESCRIPTION, proposal.getDescription( ) );
 
-        if ( proposal.getLocationType( ) == Proposal.LOCATION_TYPE_PARIS )
+        if ( Proposal.LOCATION_TYPE_PARIS.equals( proposal.getLocationType( ) ) )
         {
             docFields.put( Constants.DOCUMENT_ATTRIBUTE_LOCATION, Proposal.LOCATION_TYPE_PARIS );
         }

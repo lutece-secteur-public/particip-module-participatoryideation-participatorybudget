@@ -37,8 +37,10 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import fr.paris.lutece.plugins.participatorybudget.service.project.ProjectService;
-import fr.paris.lutece.plugins.participatorybudget.util.Constants;
+import fr.paris.lutece.plugins.participatorybudget.util.ParticipatoryBudgetConstants;
 import fr.paris.lutece.plugins.participatoryideation.business.proposal.Proposal;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
@@ -86,32 +88,33 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
         // Populate project attributes map
         Map<String, String> docFields = new HashMap<>( );
 
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS, proposal.getAdress( ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_ADDRESS_GEOLOC, proposal.getGeoJson( ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampaign( ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_DESCRIPTION, proposal.getDescription( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_ADDRESS, proposal.getAdress( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_ADDRESS_GEOLOC, proposal.getGeoJson( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampaign( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_DESCRIPTION, proposal.getDescription( ) );
 
         if ( Proposal.LOCATION_TYPE_PARIS.equals( proposal.getLocationType( ) ) )
         {
-            docFields.put( Constants.DOCUMENT_ATTRIBUTE_LOCATION, Proposal.LOCATION_TYPE_PARIS );
+            docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_LOCATION, Proposal.LOCATION_TYPE_PARIS );
         }
         else
         {
-            docFields.put( Constants.DOCUMENT_ATTRIBUTE_LOCATION, proposal.getLocationArdt( ) );
+            docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_LOCATION, proposal.getLocationArdt( ) );
         }
 
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_ID, Integer.toString( proposal.getId( ) ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_NICKNAMES, proposal.getDepositary( ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_SUBTITLE, proposal.getTitre( ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_TITLE, proposal.getTitre( ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_URL,
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_ID, Integer.toString( proposal.getId( ) ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_NICKNAMES, proposal.getDepositary( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_SUBTITLE, proposal.getTitre( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_TITLE, proposal.getTitre( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_URL,
                 "/jsp/site/Portal.jsp?page=proposal&campaign=" + proposal.getCodeCampaign( ) + "&proposal=" + proposal.getCodeProposal( ) );
 
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_STATUS, "SOUMIS" );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_THEME, proposal.getCodeTheme( ) );
-        docFields.put( Constants.DOCUMENT_ATTRIBUTE_VALUE, "" + proposal.getCout( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_STATUS, "SOUMIS" );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_THEME, proposal.getCodeTheme( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_VALUE, "" + proposal.getCout( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_POPULAR_AREA, "" + ( StringUtils.isBlank( proposal.getTypeQpvQva( ) ) ? ParticipatoryBudgetConstants.NOT_POPULAR_AREA_VALUE : proposal.getTypeQpvQva( ) ) );
 
-        // TODO : Create WS Rest API in particip-plugin-participatorybudget, and use it here, rather than directly use ProjectService class.
+        // TODO : Create WS Rest API in particip-plugin-participatorybudget, and use it here, rather than directly use ProjectService class... or not.
         return ProjectService.getInstance( ).createproject( title, summary, valid, DOCUMENT_PROJECT_PUBLISH_PORTLET_ID, docFields );
     }
 

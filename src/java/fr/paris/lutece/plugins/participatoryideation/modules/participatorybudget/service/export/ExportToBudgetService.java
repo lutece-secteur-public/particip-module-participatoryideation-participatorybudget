@@ -91,13 +91,13 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_CAMPAIGN, proposal.getCodeCampaign( ) );
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_DESCRIPTION, proposal.getDescription( ) );
 
-        if ( proposal.getLocalisationType( ) == Proposal.LOCALISATION_TYPE_PARIS )
+        if ( proposal.getLocationType( ) == Proposal.LOCATION_TYPE_PARIS )
         {
-            docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, Proposal.LOCALISATION_TYPE_PARIS );
+            docFields.put( Constants.DOCUMENT_ATTRIBUTE_LOCATION, Proposal.LOCATION_TYPE_PARIS );
         }
         else
         {
-            docFields.put( Constants.DOCUMENT_ATTRIBUTE_DISTRICT, proposal.getLocalisationArdt( ) );
+            docFields.put( Constants.DOCUMENT_ATTRIBUTE_LOCATION, proposal.getLocationArdt( ) );
         }
 
         docFields.put( Constants.DOCUMENT_ATTRIBUTE_PROPOSAL_ID, Integer.toString( proposal.getId( ) ) );

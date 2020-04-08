@@ -112,7 +112,8 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
         docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_STATUS, "SOUMIS" );
         docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_THEME, proposal.getCodeTheme( ) );
         docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_VALUE, "" + proposal.getCout( ) );
-        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_POPULAR_AREA, "" + ( StringUtils.isBlank( proposal.getTypeQpvQva( ) ) ? ParticipatoryBudgetConstants.NOT_POPULAR_AREA_VALUE : proposal.getTypeQpvQva( ) ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_POPULAR_AREA,
+                "" + ( StringUtils.isBlank( proposal.getTypeQpvQva( ) ) ? ParticipatoryBudgetConstants.NOT_POPULAR_AREA_VALUE : proposal.getTypeQpvQva( ) ) );
 
         // TODO : Create WS Rest API in particip-plugin-participatorybudget, and use it here, rather than directly use ProjectService class... or not.
         return ProjectService.getInstance( ).createproject( title, summary, valid, DOCUMENT_PROJECT_PUBLISH_PORTLET_ID, docFields );

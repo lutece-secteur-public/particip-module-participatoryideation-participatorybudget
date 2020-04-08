@@ -80,7 +80,7 @@ public class ParticipatoryIdeationCampaignEventListener implements CampaignEvent
         Collection<Submitter> submitters = SubmitterHome.getSubmitterListByCampaign( clonedCampaignCode );
         for ( Submitter submitter : submitters )
         {
-        	Submitter newSubmitter = new Submitter( );
+            Submitter newSubmitter = new Submitter( );
             newSubmitter.setCodeSubmitterType( submitter.getCodeSubmitterType( ) );
             newSubmitter.setCodeCampaign( newCampaignCode );
 
@@ -113,7 +113,7 @@ public class ParticipatoryIdeationCampaignEventListener implements CampaignEvent
     private String process_CAMPAIGN_CODE_MODIFIED( CampaignEvent campaignEvent )
     {
         // Change code in submitter data
-    	SubmitterHome.changeCampainCode( campaignEvent.getMainCampaign( ).getCode( ), campaignEvent.getLinkedCampaign( ).getCode( ) );
+        SubmitterHome.changeCampainCode( campaignEvent.getMainCampaign( ).getCode( ), campaignEvent.getLinkedCampaign( ).getCode( ) );
 
         return StringUtils.EMPTY;
     }

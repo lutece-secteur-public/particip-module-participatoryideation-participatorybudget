@@ -40,8 +40,8 @@ import org.apache.commons.lang.StringUtils;
 
 import fr.paris.lutece.plugins.participatorybudget.service.campaign.event.CampaignEvent;
 import fr.paris.lutece.plugins.participatorybudget.service.campaign.event.CampaignEventListener;
-import fr.paris.lutece.plugins.participatoryideation.business.depositary.Depositary;
-import fr.paris.lutece.plugins.participatoryideation.business.depositary.DepositaryHome;
+import fr.paris.lutece.plugins.participatoryideation.business.submitter.Submitter;
+import fr.paris.lutece.plugins.participatoryideation.business.submitter.SubmitterHome;
 import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalHome;
 import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalSearcher;
 
@@ -76,15 +76,15 @@ public class ParticipatoryIdeationCampaignEventListener implements CampaignEvent
         String clonedCampaignCode = campaignEvent.getLinkedCampaign( ).getCode( );
         String newCampaignCode = campaignEvent.getMainCampaign( ).getCode( );
 
-        // Clone depositaries
-        Collection<Depositary> depositaries = DepositaryHome.getDepositaryListByCampaign( clonedCampaignCode );
-        for ( Depositary depositary : depositaries )
+        // Clone submitters
+        Collection<Submitter> submitters = SubmitterHome.getSubmitterListByCampaign( clonedCampaignCode );
+        for ( Submitter submitter : submitters )
         {
-        	Depositary newDepositary = new Depositary( );
-            newDepositary.setCodeDepositaryType( depositary.getCodeDepositaryType( ) );
-            newDepositary.setCodeCampaign( newCampaignCode );
+        	Submitter newSubmitter = new Submitter( );
+            newSubmitter.setCodeSubmitterType( submitter.getCodeSubmitterType( ) );
+            newSubmitter.setCodeCampaign( newCampaignCode );
 
-            DepositaryHome.create( newDepositary );
+            SubmitterHome.create( newSubmitter );
         }
 
         return StringUtils.EMPTY;
@@ -112,8 +112,8 @@ public class ParticipatoryIdeationCampaignEventListener implements CampaignEvent
 
     private String process_CAMPAIGN_CODE_MODIFIED( CampaignEvent campaignEvent )
     {
-        // Change code in depositary data
-    	DepositaryHome.changeCampainCode( campaignEvent.getMainCampaign( ).getCode( ), campaignEvent.getLinkedCampaign( ).getCode( ) );
+        // Change code in submitter data
+    	SubmitterHome.changeCampainCode( campaignEvent.getMainCampaign( ).getCode( ), campaignEvent.getLinkedCampaign( ).getCode( ) );
 
         return StringUtils.EMPTY;
     }

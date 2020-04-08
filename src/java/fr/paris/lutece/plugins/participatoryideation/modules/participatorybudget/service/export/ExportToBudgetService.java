@@ -103,7 +103,7 @@ public class ExportToBudgetService extends AbstractRestBasedService implements I
         }
 
         docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_ID, Integer.toString( proposal.getId( ) ) );
-        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_NICKNAMES, proposal.getDepositary( ) );
+        docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_NICKNAMES, proposal.getSubmitter( ) );
         docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_SUBTITLE, proposal.getTitre( ) );
         docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_TITLE, proposal.getTitre( ) );
         docFields.put( ParticipatoryBudgetConstants.DOCUMENT_ATTRIBUTE_PROPOSAL_URL,

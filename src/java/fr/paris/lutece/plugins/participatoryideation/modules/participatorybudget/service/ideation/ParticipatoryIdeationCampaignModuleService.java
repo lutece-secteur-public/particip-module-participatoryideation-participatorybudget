@@ -217,4 +217,11 @@ public class ParticipatoryIdeationCampaignModuleService extends AbstractRestBase
         return parseReferenceList( json );
     }
 
+    @Override
+    public ReferenceList getCampaignThemesFrontRgb( String codeCampaign )
+    {
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/themes-front-rgb" );
+        return parseReferenceList( json );
+    }
+
 }

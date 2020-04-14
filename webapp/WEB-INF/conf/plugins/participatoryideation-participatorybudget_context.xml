@@ -8,7 +8,10 @@
 	<!-- Beans -->
 
 	<bean id="participatoryideation-participatorybudget.exportToBudgetService"  class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export.ExportToBudgetService" />
+
 	<bean id="participatoryideation-participatorybudget.participatoryIdeationModuleEventListener"  class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ideation.ParticipatoryIdeationCampaignEventListener" />
+
+	<bean id="participatoryideation-participatorybudget.dataFromBudgetService"  class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ideation.ParticipatoryIdeationCampaignModuleDataFromBudgetService" />
 
 	<!--  Workflow task : Reinit proposal -->
 
@@ -30,7 +33,7 @@
 		p:key="exportToBudgetTask"
 		p:titleI18nKey="module.participatoryideation.participatorybudget.export_to_budget_task.title"
 		p:beanName="participatoryideation-participatorybudget.exportToBudgetTask"
-		p:configRequired="false" p:taskForAutomaticAction="true" />
+		p:configRequired="false" p:taskForAutomaticAction="true"/>
 	
 	<bean id="participatoryideation-participatorybudget.exportToBudgetTask"
 		class="fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.export.ExportToBudgetTask"

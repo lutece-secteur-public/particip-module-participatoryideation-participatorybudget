@@ -33,32 +33,49 @@
  */
 package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudget.service.ideation;
 
-import javax.inject.Inject;
+import org.json.JSONObject;
 
-import fr.paris.lutece.plugins.participatoryideation.service.campaign.IdeationCampaignService;
+import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
+import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.util.ReferenceList;
 
 /**
- * This class provides campaign services and informations from plugin-participatorybudget. It overrides some methods to provides data from participatory-budget.
+ * This class provides campaign services and informations from plugin-participatorybudget. It uses the REST API of the plugin.
  */
-public class ParticipatoryIdeationCampaignModuleService extends IdeationCampaignService
+public class ParticipatoryIdeationCampaignModuleDataFromBudgetService extends AbstractRestBasedService
 {
-	@Inject
-    private ParticipatoryIdeationCampaignModuleDataFromBudgetService dataFromBudget;
 
     protected static final String REST_URL = AppPropertiesService.getProperty( "campaign.rest.webapp.url" )
             + AppPropertiesService.getProperty( "campaign.rest.demand.base_url" );
 
     // *********************************************************************************************
+    // * SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON *
+    // * SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON SINGLETON *
+    // *********************************************************************************************
+
+    private static final String BEAN_DATA_FROM_BUDGET_SERVICE = "participatoryideation-participatorybudget.dataFromBudgetService";
+
+    private static ParticipatoryIdeationCampaignModuleDataFromBudgetService _singleton;
+
+    public static ParticipatoryIdeationCampaignModuleDataFromBudgetService getInstance( )
+    {
+        if ( _singleton == null )
+        {
+            _singleton = SpringContextService.getBean( BEAN_DATA_FROM_BUDGET_SERVICE );
+        }
+        return _singleton;
+    }
+
+    // *********************************************************************************************
     // * CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN *
     // * CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN *
     // *********************************************************************************************
 
-    // Provides list of campaigns
     public ReferenceList getCampaigns( )
     {
-        return dataFromBudget.getCampaigns( );
+        JSONObject json = doGetJSon( REST_URL + "campaigns" );
+        return parseReferenceList( json );
     }
 
     // *********************************************************************************************
@@ -68,52 +85,62 @@ public class ParticipatoryIdeationCampaignModuleService extends IdeationCampaign
 
     public boolean isBeforeBeginning( String phase )
     {
-        return dataFromBudget.isBeforeBeginning( phase );
+        JSONObject json = doGetJSon( REST_URL + phase + "/before-beginning" );
+        return parseBoolean( json );
     }
 
     public boolean isBeforeBeginning( String codeCampaign, String phase )
     {
-        return dataFromBudget.isBeforeBeginning( codeCampaign, phase );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/before-beginning" );
+        return parseBoolean( json );
     }
 
     public boolean isAfterBeginning( String phase )
     {
-        return dataFromBudget.isAfterBeginning( phase );
+        JSONObject json = doGetJSon( REST_URL + phase + "/after-beginning" );
+        return parseBoolean( json );
     }
 
     public boolean isAfterBeginning( String codeCampaign, String phase )
     {
-        return dataFromBudget.isAfterBeginning( codeCampaign, phase );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/after-beginning" );
+        return parseBoolean( json );
     }
 
     public boolean isDuring( String phase )
     {
-        return dataFromBudget.isDuring( phase );
+        JSONObject json = doGetJSon( REST_URL + phase + "/during" );
+        return parseBoolean( json );
     }
 
     public boolean isDuring( String codeCampaign, String phase )
     {
-        return dataFromBudget.isDuring( codeCampaign, phase );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/during" );
+        return parseBoolean( json );
     }
 
     public boolean isBeforeEnd( String phase )
     {
-        return dataFromBudget.isBeforeEnd( phase );
+        JSONObject json = doGetJSon( REST_URL + phase + "/before-end" );
+        return parseBoolean( json );
     }
 
     public boolean isBeforeEnd( String codeCampaign, String phase )
     {
-        return dataFromBudget.isBeforeEnd( codeCampaign, phase );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/before-end" );
+        return parseBoolean( json );
     }
 
     public boolean isAfterEnd( String phase )
     {
-        return dataFromBudget.isAfterEnd( phase );
+        JSONObject json = doGetJSon( REST_URL + phase + "/after-end" );
+        return parseBoolean( json );
     }
 
     public boolean isAfterEnd( String codeCampaign, String phase )
     {
-        return dataFromBudget.isAfterEnd( codeCampaign, phase );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/" + phase + "/after-end" );
+        return parseBoolean( json );
     }
 
     // *********************************************************************************************
@@ -123,42 +150,50 @@ public class ParticipatoryIdeationCampaignModuleService extends IdeationCampaign
 
     public int getCampaignNumberLocalizedAreas( String codeCampaign )
     {
-        return dataFromBudget.getCampaignNumberLocalizedAreas( codeCampaign );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/localized-areas" );
+        return countValueList( json );
     }
 
     public int getCampaignNumberLocalizedAreas( )
     {
-        return dataFromBudget.getCampaignNumberLocalizedAreas( );
+        JSONObject json = doGetJSon( REST_URL + "localized-areas" );
+        return countValueList( json );
     }
 
     public ReferenceList getCampaignAllAreas( String codeCampaign )
     {
-        return dataFromBudget.getCampaignAllAreas( codeCampaign );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/all-areas" );
+        return parseValueList( json );
     }
 
     public ReferenceList getCampaignAllAreas( )
     {
-        return dataFromBudget.getCampaignAllAreas( );
+        JSONObject json = doGetJSon( REST_URL + "all-areas" );
+        return parseValueList( json );
     }
 
     public ReferenceList getCampaignLocalizedAreas( String codeCampaign )
     {
-        return dataFromBudget.getCampaignLocalizedAreas( codeCampaign );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/localized-areas" );
+        return parseValueList( json );
     }
 
     public ReferenceList getCampaignLocalizedAreas( )
     {
-        return dataFromBudget.getCampaignLocalizedAreas( );
+        JSONObject json = doGetJSon( REST_URL + "localized-areas" );
+        return parseValueList( json );
     }
 
     public String getCampaignWholeArea( String codeCampaign )
     {
-        return dataFromBudget.getCampaignWholeArea( codeCampaign );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/whole-area" );
+        return parseString( json );
     }
 
     public String getCampaignWholeArea( )
     {
-        return dataFromBudget.getCampaignWholeArea( );
+        JSONObject json = doGetJSon( REST_URL + "whole-area" );
+        return parseString( json );
     }
 
     // *********************************************************************************************
@@ -168,17 +203,20 @@ public class ParticipatoryIdeationCampaignModuleService extends IdeationCampaign
 
     public ReferenceList getCampaignThemes( String codeCampaign )
     {
-        return dataFromBudget.getCampaignThemes( codeCampaign );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/themes" );
+        return parseReferenceList( json );
     }
 
     public ReferenceList getCampaignThemes( )
     {
-        return dataFromBudget.getCampaignThemes( );
+        JSONObject json = doGetJSon( REST_URL + "themes" );
+        return parseReferenceList( json );
     }
 
     public ReferenceList getCampaignThemesFrontRgb( String codeCampaign )
     {
-        return dataFromBudget.getCampaignThemesFrontRgb( codeCampaign );
+        JSONObject json = doGetJSon( REST_URL + codeCampaign + "/themes-front-rgb" );
+        return parseReferenceList( json );
     }
 
 }

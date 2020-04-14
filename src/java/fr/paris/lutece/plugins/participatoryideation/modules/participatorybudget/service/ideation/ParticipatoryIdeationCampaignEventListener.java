@@ -40,10 +40,10 @@ import org.apache.commons.lang.StringUtils;
 
 import fr.paris.lutece.plugins.participatorybudget.service.campaign.event.CampaignEvent;
 import fr.paris.lutece.plugins.participatorybudget.service.campaign.event.CampaignEventListener;
-import fr.paris.lutece.plugins.participatoryideation.business.submitter.Submitter;
-import fr.paris.lutece.plugins.participatoryideation.business.submitter.SubmitterHome;
 import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalHome;
 import fr.paris.lutece.plugins.participatoryideation.business.proposal.ProposalSearcher;
+import fr.paris.lutece.plugins.participatoryideation.business.submitter.Submitter;
+import fr.paris.lutece.plugins.participatoryideation.business.submitter.SubmitterHome;
 
 public class ParticipatoryIdeationCampaignEventListener implements CampaignEventListener
 {

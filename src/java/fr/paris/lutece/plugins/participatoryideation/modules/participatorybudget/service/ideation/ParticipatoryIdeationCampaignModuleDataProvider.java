@@ -35,14 +35,14 @@ package fr.paris.lutece.plugins.participatoryideation.modules.participatorybudge
 
 import javax.inject.Inject;
 
-import fr.paris.lutece.plugins.participatoryideation.service.campaign.IdeationCampaignService;
+import fr.paris.lutece.plugins.participatoryideation.service.campaign.IdeationCampaignDataProvider;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.util.ReferenceList;
 
 /**
  * This class provides campaign services and informations from plugin-participatorybudget. It overrides some methods to provides data from participatory-budget.
  */
-public class ParticipatoryIdeationCampaignModuleService extends IdeationCampaignService
+public class ParticipatoryIdeationCampaignModuleDataProvider extends IdeationCampaignDataProvider
 {
 	@Inject
     private ParticipatoryIdeationCampaignModuleDataFromBudgetService dataFromBudget;

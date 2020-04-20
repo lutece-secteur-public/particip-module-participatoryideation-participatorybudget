@@ -37,6 +37,7 @@ import javax.inject.Inject;
 
 import fr.paris.lutece.plugins.participatoryideation.service.campaign.IdeationCampaignDataProvider;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
+import fr.paris.lutece.util.ReferenceItem;
 import fr.paris.lutece.util.ReferenceList;
 
 /**
@@ -44,7 +45,7 @@ import fr.paris.lutece.util.ReferenceList;
  */
 public class ParticipatoryIdeationCampaignModuleDataProvider extends IdeationCampaignDataProvider
 {
-	@Inject
+    @Inject
     private ParticipatoryIdeationCampaignModuleDataFromBudgetService dataFromBudget;
 
     protected static final String REST_URL = AppPropertiesService.getProperty( "campaign.rest.webapp.url" )
@@ -55,7 +56,7 @@ public class ParticipatoryIdeationCampaignModuleDataProvider extends IdeationCam
     // * CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN CAMPAIGN *
     // *********************************************************************************************
 
-    // Provides list of campaigns
+    @Override
     public ReferenceList getCampaigns( )
     {
         return dataFromBudget.getCampaigns( );
@@ -66,51 +67,61 @@ public class ParticipatoryIdeationCampaignModuleDataProvider extends IdeationCam
     // * PHASES PHASES PHASES PHASES PHASES PHASES PHASES PHASES PHASES PHASES PHASES PHASES PHASE *
     // *********************************************************************************************
 
+    @Override
     public boolean isBeforeBeginning( String phase )
     {
         return dataFromBudget.isBeforeBeginning( phase );
     }
 
+    @Override
     public boolean isBeforeBeginning( String codeCampaign, String phase )
     {
         return dataFromBudget.isBeforeBeginning( codeCampaign, phase );
     }
 
+    @Override
     public boolean isAfterBeginning( String phase )
     {
         return dataFromBudget.isAfterBeginning( phase );
     }
 
+    @Override
     public boolean isAfterBeginning( String codeCampaign, String phase )
     {
         return dataFromBudget.isAfterBeginning( codeCampaign, phase );
     }
 
+    @Override
     public boolean isDuring( String phase )
     {
         return dataFromBudget.isDuring( phase );
     }
 
+    @Override
     public boolean isDuring( String codeCampaign, String phase )
     {
         return dataFromBudget.isDuring( codeCampaign, phase );
     }
 
+    @Override
     public boolean isBeforeEnd( String phase )
     {
         return dataFromBudget.isBeforeEnd( phase );
     }
 
+    @Override
     public boolean isBeforeEnd( String codeCampaign, String phase )
     {
         return dataFromBudget.isBeforeEnd( codeCampaign, phase );
     }
 
+    @Override
     public boolean isAfterEnd( String phase )
     {
         return dataFromBudget.isAfterEnd( phase );
     }
 
+    @Override
     public boolean isAfterEnd( String codeCampaign, String phase )
     {
         return dataFromBudget.isAfterEnd( codeCampaign, phase );
@@ -121,42 +132,50 @@ public class ParticipatoryIdeationCampaignModuleDataProvider extends IdeationCam
     // * AREA AREA AREA AREA AREA AREA AREA AREA AREA AREA AREA AREA AREA AREA AREA AREA AREA AREA *
     // *********************************************************************************************
 
+    @Override
     public int getCampaignNumberLocalizedAreas( String codeCampaign )
     {
         return dataFromBudget.getCampaignNumberLocalizedAreas( codeCampaign );
     }
 
-    public int getCampaignNumberLocalizedAreas( )
+    @Override
+    public int getLastCampaignNumberLocalizedAreas( )
     {
         return dataFromBudget.getCampaignNumberLocalizedAreas( );
     }
 
+    @Override
     public ReferenceList getCampaignAllAreas( String codeCampaign )
     {
         return dataFromBudget.getCampaignAllAreas( codeCampaign );
     }
 
-    public ReferenceList getCampaignAllAreas( )
+    @Override
+    public ReferenceList getLastCampaignAllAreas( )
     {
         return dataFromBudget.getCampaignAllAreas( );
     }
 
+    @Override
     public ReferenceList getCampaignLocalizedAreas( String codeCampaign )
     {
         return dataFromBudget.getCampaignLocalizedAreas( codeCampaign );
     }
 
-    public ReferenceList getCampaignLocalizedAreas( )
+    @Override
+    public ReferenceList getLastCampaignLocalizedAreas( )
     {
         return dataFromBudget.getCampaignLocalizedAreas( );
     }
 
-    public String getCampaignWholeArea( String codeCampaign )
+    @Override
+    public ReferenceItem getCampaignWholeArea( String codeCampaign )
     {
         return dataFromBudget.getCampaignWholeArea( codeCampaign );
     }
 
-    public String getCampaignWholeArea( )
+    @Override
+    public ReferenceItem getLastCampaignWholeArea( )
     {
         return dataFromBudget.getCampaignWholeArea( );
     }
@@ -166,16 +185,19 @@ public class ParticipatoryIdeationCampaignModuleDataProvider extends IdeationCam
     // * THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEME *
     // *********************************************************************************************
 
+    @Override
     public ReferenceList getCampaignThemes( String codeCampaign )
     {
         return dataFromBudget.getCampaignThemes( codeCampaign );
     }
 
-    public ReferenceList getCampaignThemes( )
+    @Override
+    public ReferenceList getLastCampaignThemes( )
     {
         return dataFromBudget.getCampaignThemes( );
     }
 
+    @Override
     public ReferenceList getCampaignThemesFrontRgb( String codeCampaign )
     {
         return dataFromBudget.getCampaignThemesFrontRgb( codeCampaign );

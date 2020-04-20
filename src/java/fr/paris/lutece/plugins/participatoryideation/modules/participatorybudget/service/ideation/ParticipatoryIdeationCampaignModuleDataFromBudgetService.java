@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
+import fr.paris.lutece.util.ReferenceItem;
 import fr.paris.lutece.util.ReferenceList;
 
 /**
@@ -184,16 +185,28 @@ public class ParticipatoryIdeationCampaignModuleDataFromBudgetService extends Ab
         return parseValueList( json );
     }
 
-    public String getCampaignWholeArea( String codeCampaign )
+    public ReferenceItem getCampaignWholeArea( String codeCampaign )
     {
         JSONObject json = doGetJSon( REST_URL + codeCampaign + "/whole-area" );
-        return parseString( json );
+        String value = parseString( json );
+
+        ReferenceItem item = new ReferenceItem( );
+        item.setCode( value );
+        item.setName( value );
+
+        return item;
     }
 
-    public String getCampaignWholeArea( )
+    public ReferenceItem getCampaignWholeArea( )
     {
         JSONObject json = doGetJSon( REST_URL + "whole-area" );
-        return parseString( json );
+        String value = parseString( json );
+
+        ReferenceItem item = new ReferenceItem( );
+        item.setCode( value );
+        item.setName( value );
+
+        return item;
     }
 
     // *********************************************************************************************

@@ -2,11 +2,11 @@
 <project>
     <body>
         <links>
-            <item name="EN" href="../index.ftl" />
+            <item name="EN" href="../index.html" />
         </links>
         
         <menu name="Module ParticipatoryIdeation ParticipatoryBudget">
-            <item name="Accueil" href="index.ftl"/>
+            <item name="Accueil" href="index.html"/>
         </menu>
         
         <menu name="Téléchargements" inherit="bottom" >

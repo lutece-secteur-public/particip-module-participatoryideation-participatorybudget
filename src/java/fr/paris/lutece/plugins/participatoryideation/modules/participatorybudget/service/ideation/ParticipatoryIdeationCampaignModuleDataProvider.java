@@ -145,42 +145,54 @@ public class ParticipatoryIdeationCampaignModuleDataProvider extends IdeationCam
     }
 
     @Override
-    public ReferenceList getCampaignAllAreas( String codeCampaign )
+    public ReferenceList getCampaignAllAreaLabels( String codeCampaign )
     {
         return dataFromBudget.getCampaignAllAreas( codeCampaign );
     }
 
     @Override
-    public ReferenceList getLastCampaignAllAreas( )
+    public ReferenceList getLastCampaignAllAreaLabels( )
     {
         return dataFromBudget.getCampaignAllAreas( );
     }
 
     @Override
-    public ReferenceList getCampaignLocalizedAreas( String codeCampaign )
+    public ReferenceList getCampaignLocalizedAreaLabels( String codeCampaign )
     {
         return dataFromBudget.getCampaignLocalizedAreas( codeCampaign );
     }
 
     @Override
-    public ReferenceList getLastCampaignLocalizedAreas( )
+    public ReferenceList getLastCampaignLocalizedAreaLabels( )
     {
         return dataFromBudget.getCampaignLocalizedAreas( );
     }
 
     @Override
-    public ReferenceItem getCampaignWholeArea( String codeCampaign )
+    public ReferenceItem getCampaignWholeAreaLabel( String codeCampaign )
     {
         return dataFromBudget.getCampaignWholeArea( codeCampaign );
     }
 
     @Override
-    public ReferenceItem getLastCampaignWholeArea( )
+    public ReferenceItem getLastCampaignWholeAreaLabel( )
     {
         return dataFromBudget.getCampaignWholeArea( );
     }
 
-    // *********************************************************************************************
+    @Override
+    public ReferenceList getCampaignAllAreaTypes( String codeCampaign )
+    {
+    	return null;
+    }
+
+    @Override
+    public ReferenceList getLastCampaignAllAreaTypes( )
+    {
+    	return null;
+    }
+
+// *********************************************************************************************
     // * THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEME *
     // * THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEMES THEME *
     // *********************************************************************************************

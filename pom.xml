@@ -47,7 +47,7 @@
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/lutece-secteur-public/module-participatoryideation-participatorybudget.gitt</connection>
+        <connection>scm:git:https://github.com/lutece-secteur-public/module-participatoryideation-participatorybudget.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-secteur-public/module-participatoryideation-participatorybudget.git</developerConnection>
         <url>https://github.com/lutece-secteur-public/module-participatoryideation-participatorybudget.git</url>
     </scm>

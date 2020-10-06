@@ -38,6 +38,9 @@ import org.json.JSONObject;
 import fr.paris.lutece.plugins.participatoryideation.service.myinfos.IMyInfosService;
 import fr.paris.lutece.plugins.participatoryideation.service.rest.AbstractRestBasedService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * This class provides 'myinfos' services from plugin-participatorybudget. It uses the REST API of the plugin.
@@ -56,7 +59,7 @@ public class MyInfosFromParticipatoryBudgetService extends AbstractRestBasedServ
     @Override
     public boolean isUserValid( String userId )
     {
-        JSONObject json = doGetJSon( REST_URL + userId + "/are-myinfos-valid" );
+        JSONObject json = doGetJSon( REST_URL + encodeValue( userId ) + "/are-myinfos-valid" );
         return parseBoolean( json );
     }
 
@@ -72,4 +75,19 @@ public class MyInfosFromParticipatoryBudgetService extends AbstractRestBasedServ
         return parseString( json );
     }
 
+    /**
+     * Return the url-encoded string, handling special characters
+     *
+     * @param value
+     *           Raw url parameter
+     *
+     * @return String The url-encoded string
+     */
+    private static String encodeValue(String value) {
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex.getCause());
+        }
+    }
 }
